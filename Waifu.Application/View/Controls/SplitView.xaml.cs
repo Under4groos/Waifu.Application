@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using Waifu.Application.Helper;
 
 namespace Waifu.Application.View.Controls
 {
@@ -12,6 +11,11 @@ namespace Waifu.Application.View.Controls
     public partial class SplitView : UserControl
     {
         private bool IsDown = false;
+
+        public Action<string>? ChangePathImage;
+
+        public string PathImageFile { get; set; }
+
         public SplitView()
         {
             InitializeComponent();
@@ -19,6 +23,8 @@ namespace Waifu.Application.View.Controls
 
             grid.MouseMove += Grid_MouseMove;
             Loaded += SplitView_Loaded;
+
+            App.splitView = this;
         }
 
         private void SplitView_Loaded(object sender, RoutedEventArgs e)
@@ -37,7 +43,7 @@ namespace Waifu.Application.View.Controls
 
         }
 
-        void SetRecPos(double x)
+        public void SetRecPos(double x)
         {
             x = x < 0 ? 0 : x > ActualWidth - 0.1 ? ActualWidth : x;
             x = ActualWidth - x;
@@ -56,15 +62,37 @@ namespace Waifu.Application.View.Controls
                 string file = ((string[])e.Data.GetData(DataFormats.FileDrop)).FirstOrDefault(string.Empty);
                 if (string.IsNullOrEmpty(file) || !File.Exists(file))
                     return;
+                PathImageFile = file;
 
-                //-n noise - level       denoise level(-1 / 0 / 1 / 2 / 3, default = 0)
-                //-s scale upscale ratio(1 / 2 / 4 / 8 / 16 / 32, default = 2)
-                await Waifu2xConsole.Waifu2xConsoleRun(
-                    file,
-                    $"{file}_ai_.png", noiseLevel: 3, scale: 16);
-                img2.Source = new BitmapImage(new Uri($"{file}_ai_.png"));
-                img1.Source = new BitmapImage(new Uri(file));
+                loaded.Visibility = Visibility.Visible;
+                LoadedImage(PathImageFile, null);
+                loaded.Visibility = Visibility.Collapsed;
+
+
+
+                ChangePathImage?.Invoke(PathImageFile);
+
+
             }
+        }
+        public void LoadedImage(string? imgo, string? imga)
+        {
+
+            if (!string.IsNullOrEmpty(imgo) && File.Exists(imgo))
+            {
+                img1.Source = new BitmapImage(new Uri(imgo));
+            }
+
+
+            if (!string.IsNullOrEmpty(imga) && File.Exists(imga))
+            {
+                img2.Source = new BitmapImage(new Uri(imga));
+            }
+            else
+            {
+                img2.Source = null;
+            }
+
         }
     }
 }

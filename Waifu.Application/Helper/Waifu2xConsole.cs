@@ -20,20 +20,18 @@ namespace Waifu.Application.Helper
         //-f format            output image format(jpg/png/webp, default=ext/png)
 
         // waifu2x.exe -i "C:\Users\UnderKo\Downloads\input.jpg" -o "C:\Users\UnderKo\Downloads\output.p
-        public static async Task Waifu2xConsoleRun(
+
+        public static string CreateConsoleCommand(
             string input, string output,
-            int noiseLevel = 0,
-            int scale = 2,
-            int tileSize = 0,
-            int gpuId = 0,
+            string noiseLevel = "0",
+            string scale = "2",
+            string tileSize = "0",
+            string gpuId = "0",
             string threadCount = "1:2:2",
             string format = "ext/png"
             )
         {
-            using (Process process = new Process())
-            {
-
-                var strArgs = new Dictionary<string, string>()
+            var v = new Dictionary<string, string>()
                 {
                     { "-i" , $"\"{input}\"" },
                     { "-o",  $"\"{output}\"" },
@@ -41,11 +39,23 @@ namespace Waifu.Application.Helper
                     { "-s",  $"{scale}" },
                     { "-g",  $"{gpuId}" },
                     { "-t",  $"{tileSize}" },
-                };
+            };
+
+
+            return string.Join(" ", v.Select(x => $"{x.Key} {x.Value}"));
+        }
+
+
+        public static async Task Waifu2xConsoleRun(string keyValuePairs
+            )
+        {
+            using (Process process = new Process())
+            {
 
 
 
-                process.StartInfo.Arguments = string.Join(" ", strArgs.Select(x => $"{x.Key} {x.Value}"));
+
+                process.StartInfo.Arguments = keyValuePairs;
 
                 process.StartInfo.FileName = "waifu2x.exe";
                 process.StartInfo.UseShellExecute = false;

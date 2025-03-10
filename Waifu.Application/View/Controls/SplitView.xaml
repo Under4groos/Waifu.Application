@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Waifu.Application.View.Controls"
              mc:Ignorable="d"  AllowDrop="True" Drop="userControl_Drop"
-             MinHeight="800"
-             d:DesignHeight="1080" d:DesignWidth="1920">
+             MinHeight="400"
+             d:DesignHeight="1080">
     <UserControl.Resources>
         <SolidColorBrush x:Key="wh0" Color="White" Opacity="0.1"/>
     </UserControl.Resources>
@@ -14,20 +14,51 @@
         <Grid x:Name="grid" Margin="5" Background="{StaticResource wh0}">
             <Grid Width="{Binding Width, ElementName=userControl, Mode=OneWay}" >
                 <Image x:Name="img1" />
-                <Label Margin="15" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="25">Origin</Label>
+                <Label Margin="15" Content="Origin" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="25">
+                    <Label.Effect>
+
+                        <DropShadowEffect BlurRadius="22" 
+            ShadowDepth="0"  Direction="0"
+            Color="Black" RenderingBias="Quality"/>
+                    </Label.Effect>
+                </Label>
                 <Grid.Clip>
                     <RectangleGeometry x:Name="rec0" Rect="0,0,1100,1080"/>
                 </Grid.Clip>
             </Grid>
             <Grid Width="{Binding Width, ElementName=userControl, Mode=OneWay}" >
                 <Image x:Name="img2" />
-                
-                <Label Margin="15" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="25">AI</Label>
-                <Grid.Clip>
+
+                <Label Margin="15" Content="AI" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="25">
+                    <Label.Effect>
+                        
+                        <DropShadowEffect BlurRadius="22" 
+                           ShadowDepth="0"  Direction="0"
+                           Color="Black" RenderingBias="Quality"/>
+                    </Label.Effect>
+                </Label>
+
+                    <Grid.Clip>
                     <RectangleGeometry x:Name="rec1" Rect="1100,0,1100,1080"/>
                 </Grid.Clip>
             </Grid>
-
+            <Ellipse x:Name="loaded" Visibility="Collapsed" Width="100" Height="100" Fill="LightBlue" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Ellipse.RenderTransform>
+                    <RotateTransform x:Name="rotateTransform" />
+                </Ellipse.RenderTransform>
+                <Ellipse.Triggers>
+                    <EventTrigger RoutedEvent="Window.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever">
+                                <DoubleAnimation
+                         Storyboard.TargetName="rotateTransform"
+                         Storyboard.TargetProperty="Angle"
+                         From="0" To="360" Duration="0:0:1" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Ellipse.Triggers>
+            </Ellipse>
         </Grid>
     </Border>
 </UserControl>

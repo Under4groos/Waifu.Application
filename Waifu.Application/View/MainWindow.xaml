@@ -11,18 +11,22 @@
         xmlns:ViewCanvasControls="clr-namespace:ViewCanvas.View;assembly=ViewCanvas" 
         Style="{DynamicResource win}" OpacityBackground="1"
         >
-    
+
     <Grid Margin="5" Background="Transparent">
 
-        <ViewCanvasControls:VCanvas   ClipToBounds="True" Background="Transparent">
-            <Controls:SplitView Width="1920"   ClipToBounds="True" Background="Transparent" />
+        <ViewCanvasControls:VCanvas ClipToBounds="True" Background="Transparent">
+            <StackPanel Orientation="Horizontal">
+
+                <Controls:ControlOptions />
+                <Controls:SplitView   MinWidth="300"   ClipToBounds="True" Background="Transparent" />
+
+
+            </StackPanel>
         </ViewCanvasControls:VCanvas>
 
-        <Border Visibility="Collapsed" Background="{DynamicResource border.hover}">
-            <StackPanel>
-                
-            </StackPanel>
-        </Border>
-        
+
+
+
+
     </Grid>
 </wpf:DarkWindow>
