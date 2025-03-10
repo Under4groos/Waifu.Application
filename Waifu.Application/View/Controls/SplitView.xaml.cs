@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using Waifu.Application.Helper;
 
 namespace Waifu.Application.View.Controls
 {
@@ -44,10 +47,24 @@ namespace Waifu.Application.View.Controls
             rec1.Rect = new Rect(ActualWidth - x, 0, ActualWidth, ActualHeight);
         }
 
+        private async void userControl_Drop(object sender, DragEventArgs e)
+        {
 
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
 
+                string file = ((string[])e.Data.GetData(DataFormats.FileDrop)).FirstOrDefault(string.Empty);
+                if (string.IsNullOrEmpty(file) || !File.Exists(file))
+                    return;
 
-
-
+                //-n noise - level       denoise level(-1 / 0 / 1 / 2 / 3, default = 0)
+                //-s scale upscale ratio(1 / 2 / 4 / 8 / 16 / 32, default = 2)
+                await Waifu2xConsole.Waifu2xConsoleRun(
+                    file,
+                    $"{file}_ai_.png", noiseLevel: 3, scale: 16);
+                img2.Source = new BitmapImage(new Uri($"{file}_ai_.png"));
+                img1.Source = new BitmapImage(new Uri(file));
+            }
+        }
     }
 }
