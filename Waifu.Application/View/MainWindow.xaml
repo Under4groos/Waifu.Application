@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Waifu.Application"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="800" Width="1200"
+        Height="800" Width="1200"
         xmlns:DarkGalaxyControls="clr-namespace:WPF.DarkGalaxy.Controls;assembly=WPF.DarkGalaxy"
         xmlns:wpf="http://github.com/Under4groos/WPF.DarkGalaxy"
         xmlns:ViewCanvasControls="clr-namespace:ViewCanvas.View;assembly=ViewCanvas" 
         Style="{DynamicResource win}" OpacityBackground="1"
+                Title="Waifu.Application"
         >
 
     <Grid Margin="5" Background="Transparent">

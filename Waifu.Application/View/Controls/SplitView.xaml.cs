@@ -94,5 +94,10 @@ namespace Waifu.Application.View.Controls
             }
 
         }
+        public void Clear()
+        {
+            img1.Source = null;
+            img2.Source = null;
+        }
     }
 }

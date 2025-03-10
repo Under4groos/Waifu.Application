@@ -76,5 +76,11 @@ namespace Waifu.Application.View.Controls
 
             App.splitView.SetRecPos(ActualWidth / 2);
         }
+
+        private void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)
+        {
+            App.splitView.Clear();
+            GC.Collect();
+        }
     }
 }
