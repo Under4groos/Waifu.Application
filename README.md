@@ -7,12 +7,15 @@ https://github.com/nihui/waifu2x-ncnn-vulkan
 ```
 
 2. Open System 
+
 ![enter image description here](assets/F7jtaSQyuG.png)
 
 3. Variable environments => path => change 
+
 ![enter image description here](assets/Code_9PI2JxPbb1.png)
 
 4. Append new path  
+
 ![enter image description here](assets/SystemPropertiesAdvanced_MyfggcKo0h.png)
 
 
@@ -24,6 +27,7 @@ https://github.com/nihui/waifu2x-ncnn-vulkan
 waifu2x
 ```
 3. Cool!
+
 ![enter image description here](assets/WindowsTerminal_enA8csfO8T.png)
 
 # Open application 
