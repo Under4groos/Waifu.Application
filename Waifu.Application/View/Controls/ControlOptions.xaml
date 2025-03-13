@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Waifu.Application.View.Controls"
+             xmlns:local="clr-namespace:Waifu.Application.View.Controls" xmlns:viewmodel="clr-namespace:Waifu.Application.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:VMControlOptions}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border  MinWidth="450"  Margin="0,0,10,0" Background="{DynamicResource border.hover}">
+    <Border CornerRadius="4"   Margin="0,0,10,0" Background="{DynamicResource border.hover}">
 
         <StackPanel Margin="10">
             <Label Content="File"/>
@@ -30,11 +30,20 @@
                 <Button Margin="2" Content="16" Style="{DynamicResource Button.base}"/>
                 <Button Margin="2" Content="32" Style="{DynamicResource Button.base}"/>
             </StackPanel>
-            <Label Content="Command"/>
-            <Label Name="labelcommand" Content=""/>
-            <Button Click="Button_Click"  Margin="0,10,0,0" Content="Upscale" Style="{DynamicResource Button.base}"/>
+            <StackPanel Visibility="Collapsed">
+                <Label Content="Command"/>
+                <Label Name="labelcommand"  Content=""/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Models"/>
 
-            <Button Click="Button_Click_1"  Margin="0,10,0,0" Content="Clear" Style="{DynamicResource Button.base}"/>
+                <ComboBox x:Name="cmmodels" SelectedIndex="0"  ItemsSource="{Binding ModelsPath}"/>
+
+
+            </StackPanel>
+            <Button Click="Btn_Start"  Margin="0,10,0,0" Content="Upscale" Style="{DynamicResource Button.base}"/>
+
+            <Button Click="Btn_Clear"  Margin="0,10,0,0" Content="Clear" Style="{DynamicResource Button.base}"/>
 
         </StackPanel>
     </Border>

@@ -11,7 +11,13 @@ public partial class MainWindow : DarkWindow
 
     public MainWindow()
     {
+
+
         InitializeComponent();
+
+
+
+
 
     }
 

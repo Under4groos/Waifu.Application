@@ -14,18 +14,21 @@
         >
 
     <Grid Margin="5" Background="Transparent">
-
-        <ViewCanvasControls:VCanvas ClipToBounds="True" Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ViewCanvasControls:VCanvas Grid.Column="1" ClipToBounds="True" Background="Transparent">
             <StackPanel Orientation="Horizontal">
 
-                <Controls:ControlOptions />
+               
                 <Controls:SplitView   MinWidth="300"   ClipToBounds="True" Background="Transparent" />
 
 
             </StackPanel>
         </ViewCanvasControls:VCanvas>
 
-
+        <Controls:ControlOptions Grid.Column="0" />
 
 
 

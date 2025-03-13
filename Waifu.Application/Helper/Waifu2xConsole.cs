@@ -28,17 +28,21 @@ namespace Waifu.Application.Helper
             string tileSize = "0",
             string gpuId = "0",
             string threadCount = "1:2:2",
-            string format = "ext/png"
+            string format = "ext/png",
+            string filter = "Lanczos",
+            string models = ""
             )
         {
             var v = new Dictionary<string, string>()
-                {
-                    { "-i" , $"\"{input}\"" },
-                    { "-o",  $"\"{output}\"" },
-                    { "-n",  $"{noiseLevel}" },
-                    { "-s",  $"{scale}" },
-                    { "-g",  $"{gpuId}" },
-                    { "-t",  $"{tileSize}" },
+            {
+                { "-i" , $"\"{input}\"" },
+                { "-o",  $"\"{output}\"" },
+                { "-n",  $"{noiseLevel}" },
+                { "-s",  $"{scale}" },
+                { "-g",  $"{gpuId}" },
+                { "-t",  $"{tileSize}" },
+                { "-filter ",  $"{filter}" },
+                { "-model_dir" , $"\"{models}\"" }
             };
 
 
