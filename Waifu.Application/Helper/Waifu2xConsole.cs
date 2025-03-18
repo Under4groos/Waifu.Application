@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Windows;
 
 namespace Waifu.Application.Helper
 {
@@ -53,35 +54,44 @@ namespace Waifu.Application.Helper
         public static async Task Waifu2xConsoleRun(string keyValuePairs
             )
         {
-            using (Process process = new Process())
+            try
             {
-
-
-
-
-                process.StartInfo.Arguments = keyValuePairs;
-
-                process.StartInfo.FileName = "waifu2x.exe";
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardError = true;
-                process.StartInfo.CreateNoWindow = true;
-
-
-                process.OutputDataReceived += (sender, e) =>
+                using (Process process = new Process())
                 {
-                    if (!string.IsNullOrEmpty(e.Data))
+
+
+
+
+                    process.StartInfo.Arguments = keyValuePairs;
+
+                    process.StartInfo.FileName = "waifu2x-ncnn-vulkan.exe";
+                    process.StartInfo.UseShellExecute = false;
+                    process.StartInfo.RedirectStandardOutput = true;
+                    process.StartInfo.RedirectStandardError = true;
+                    process.StartInfo.CreateNoWindow = true;
+
+
+                    process.OutputDataReceived += (sender, e) =>
                     {
-                        Debug.WriteLine(e.Data);
-                    }
-                };
+                        if (!string.IsNullOrEmpty(e.Data))
+                        {
+                            Debug.WriteLine(e.Data);
+                        }
+                    };
 
 
-                process.Start();
-                process.BeginOutputReadLine();
-                process.BeginErrorReadLine();
-                await Task.Run(() => process.WaitForExit());
+                    process.Start();
+                    process.BeginOutputReadLine();
+                    process.BeginErrorReadLine();
+                    await Task.Run(() => process.WaitForExit());
+                }
             }
+            catch (Exception e)
+            {
+                // public static MessageBoxResult Show(Window owner, string messageBoxText, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult, MessageBoxOptions options);
+                MessageBox.Show($"{e.Message}\n{"Error! waifu2x-ncnn-vulkan.exe not found!"}", "Error waifu2x-ncnn-vulkan.exe");
+            }
+
         }
 
 
