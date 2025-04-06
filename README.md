@@ -24,7 +24,7 @@ https://github.com/nihui/waifu2x-ncnn-vulkan
 1. Open cmd 
 2. Write 
 ```
-waifu2x
+waifu2x-ncnn-vulkan
 ```
 3. Cool!
 
